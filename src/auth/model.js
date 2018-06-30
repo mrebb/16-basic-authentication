@@ -3,7 +3,6 @@ require('dotenv').config();
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-mongoose.connect('mongodb://localhost/basicAuth');
 const userSchema = new mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
@@ -41,7 +40,7 @@ userSchema.methods.comparePassword = function(password) {
 
 // Generate a JWT from the user id and a secret
 userSchema.methods.generateToken = function() {
-  return jwt.sign( {id:this._id}, process.env.APP_SECRET);
+  return jwt.sign( {id:this._id}, process.env.APP_SECRET || 'emeraldcity');
 };
 
 export default mongoose.model('users', userSchema);
