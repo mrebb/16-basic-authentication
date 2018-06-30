@@ -1,28 +1,10 @@
 ![CF](https://camo.githubusercontent.com/70edab54bba80edb7493cad3135e9606781cbb6b/687474703a2f2f692e696d6775722e636f6d2f377635415363382e706e67) 16: Basic Auth
 ===
+<img src="https://travis-ci.com/mrebb/16-basic-authentication.svg?branch=madhu">
 
-## Submission Instructions
-  * Follow the lab submission instructions in the reference folder 
+## TRAVIS: https://travis-ci.com/mrebb/16-basic-authentication
 
-## Learning Objectives  
-* students will be able to create basic authorization middleware
-* students will be able to test basic authorization for signup/signin routes
-
-## Requirements
-
-## Feature Tasks
-
-* create an HTTP server using `express`
-* using `mongoose`, create a **User** model with the following properties and options:
-  * `username` - *required and unique*
-  * `email` - *required and unique*
-  * `password` - *required - this must be hashed and can not stored as plain text*
-* use the **npm** `debug` module to log function calls that are used within your application
-* use the **express** `Router` to create a custom router for allowing users to **sign up** and **sign in**
-* use the **npm** `dotenv` module to house the following environment variables:
-  * `PORT`
-  * `MONGODB_URI`
-  * `APP_SECRET` *(used for signing and verify tokens)*
+## HEROKU: https://mongodb-lab16.herokuapp.com
 
 ## Server Endpoints
 ### `/api/signup`
@@ -39,11 +21,13 @@
 * the server should respond with a token for authenticated users
 * the server should respond with **401 Unauthorized** for non-authenticated users
 
+
 ## Tests
-* create a test that will ensure that your API returns a status code of **404** for any routes that have not been registered
-* `/api/signup`
-* `POST` - test **400**, if no request body has been provided or the body is invalid
-* `POST` - test **200**, if the request body has been provided and is valid
+
 * `/api/signin`
-* `GET` - test **401**, if the user could not be authenticated
-* `GET` - test **200**, responds with token for a request with a valid basic authorization header
+  * `GET`: test for 401: Respond with 'bad request' if request body was invalid or invalid user tries to login
+  * `GET`: test for 200: Responds with response body for a request made with a valid user credentials
+* `/api/signup`
+  * `POST`: test for 400: Responds with 'bad request' if no request body was provided or the body was invalid
+  * `POST`: test for 200: Responds with the body content for a post request with a valid body
+* `404`: page not found for all other routes that are not handled by API.
