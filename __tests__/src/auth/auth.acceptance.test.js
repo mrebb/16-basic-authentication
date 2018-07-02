@@ -1,22 +1,19 @@
 'use strict';
-
+require('dotenv').config();
 const superagent = require('superagent');
 const mongoose = require('mongoose');
 const app = require('../../../src/app.js');
-//import auth from '../../../src/auth/middleware';
-//jest.mock('../../../src/auth/model.js');
 describe('Authentication Server', () => {
   var server;
   const PORT = 8888;
   server = app.start(PORT);
   beforeAll( () => {
-    mongoose.connect('mongodb://heroku_lmhxqkb3:kojev45vm9o332bftgufp6ujkk@ds239557.mlab.com:39557/heroku_lmhxqkb3');
+    mongoose.connect(process.env.MONGODB_URI);
   });
   afterAll( () => {
     mongoose.connection.db.dropCollection('users');
     mongoose.connection.close();
     server.close();
-    
   });
 
   it('should create one on signup',() =>{
