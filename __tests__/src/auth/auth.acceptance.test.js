@@ -46,7 +46,7 @@ describe('Authentication Server', () => {
 
   it('gets a 200 on a good login', () => {
     return superagent.get('http://localhost:8888/api/signin')
-      .auth('madhu','foo')
+      .set({'Authorization': `Basic bWFkaHU6Zm9v` })
       .then(response => {
         expect(response.statusCode).toEqual(200);
         expect(response.text).toEqual('Welcome');
